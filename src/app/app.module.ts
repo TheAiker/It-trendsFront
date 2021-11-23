@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { MatSliderModule } from '@angular/material/slider';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,20 +8,26 @@ import { HeaderComponent } from './components/header/header.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { ButtonComponent } from './components/button/button.component';
 import { GroupItemComponent } from './components/group-item/group-item.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component'
+import {MatIconModule} from '@angular/material/icon';
+import { StudentsComponent } from './components/students/students.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     GroupsComponent,
     ButtonComponent,
-    GroupItemComponent
+    GroupItemComponent,
+    HomeComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
+    MatIconModule,
     HttpClientModule
   ],
   providers: [],

@@ -19,9 +19,9 @@
   width: 200px;
   margin-left: 10px;
   padding: 0px 10px;
-  color: white;
-
+  cursor: pointer;
 }
+
 .header-buttons {
   height: 60px;
   width: 200px;

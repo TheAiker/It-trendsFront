@@ -1,14 +1,10 @@
 
 <div class="header-container">
-  <span class="logo" routerLink="/">
-    here lies the logo
+  <span class="logo" routerLink="/home" routerLinkActive="active">
+    <mat-icon color="warn" aria-hidden="false" aria-label="Example home icon">home</mat-icon>
   </span>
   <div class="header-buttons">
-    <button>
-      groups
-    </button>
-    <button>
-      students
-    </button>
+    <app-button label="Groups" routerLink="/groups" ></app-button>
+    <app-button label="Students" routerLink="/students"></app-button>
   </div>
 </div>

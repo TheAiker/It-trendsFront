@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css']
+  selector: "app-button",
+  templateUrl: "./button.component.html",
+  styleUrls: ["./button.component.css"],
 })
 export class ButtonComponent implements OnInit {
+  @Input()
+  label: string = "lol";
 
-  constructor() { }
+  @Input()
+  onClick: VoidFunction = () => {};
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }
