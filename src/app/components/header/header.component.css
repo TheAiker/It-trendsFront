@@ -16,10 +16,13 @@
   justify-content: center;
   align-items: center;
   height: 60px;
-  width: 200px;
+  width: 100px;
   margin-left: 10px;
   padding: 0px 10px;
   cursor: pointer;
+  border: 1px solid;
+  border-color: #f44336;
+
 }
 
 .header-buttons {
@@ -29,4 +32,5 @@
   justify-content: space-between;
   margin-right: 10px;
   padding: 5px 10px;
+  align-items: center;
 }
