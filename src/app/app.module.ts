@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { ButtonComponent } from './components/button/button.component';
 import { GroupItemComponent } from './components/group-item/group-item.component';
-
+import { HttpClientModule } from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,8 @@ import { GroupItemComponent } from './components/group-item/group-item.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

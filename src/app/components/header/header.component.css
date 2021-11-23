@@ -1,12 +1,32 @@
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 4;
   width: 100%;
-  height: 40px;
-  background-color: red;
+  height: 80px;
+  background-color: rgb(75, 75, 75);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 200px;
+  margin-left: 10px;
+  padding: 0px 10px;
+  color: white;
+
+}
+.header-buttons {
+  height: 60px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 5px 10px;
 }
