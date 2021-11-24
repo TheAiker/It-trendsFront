@@ -13,7 +13,32 @@
       Remove data
     </button>
   </div>
+  <div>
+    <app-button>
+    </app-button>
+    <input type="submit">
+  </div>
 
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>GroupName</th>
+        <th>Group year</th>
+        <th>President</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="Groupies">
+        <td><span>{{groups.GroupName}}</span></td>
+        <td><span>{{}}</span></td>
+        <td><span>{{}}</span></td>
+        <td><span>{{}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
     <ng-container matColumnDef="position">

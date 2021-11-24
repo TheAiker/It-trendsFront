@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTable } from "@angular/material/table";
+import { group } from "console";
 
 export class Group {
   constructor(
@@ -12,7 +13,9 @@ export class Group {
     public GroupYear: number
   ) {}
 }
+// const GROUP_DATA: Group[] = [
 
+// ]
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -41,7 +44,7 @@ export class GroupsComponent implements OnInit {
   displayedColumns: string[] = ["position", "name", "weight", "symbol"];
   dataSource = [...ELEMENT_DATA];
 
-  groups?: Group[];
+  groups?: Group[] = [];
   constructor(private HttpClient: HttpClient) {}
 
   ngOnInit(): void {
