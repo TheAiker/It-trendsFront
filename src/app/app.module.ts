@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './components/header/header.component';
-import { GroupsComponent } from './components/groups/groups.component';
-import { ButtonComponent } from './components/button/button.component';
-import { GroupItemComponent } from './components/group-item/group-item.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './components/home/home.component'
-import {MatIconModule} from '@angular/material/icon';
-import { StudentsComponent } from './components/students/students.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HeaderComponent } from "./components/header/header.component";
+import { GroupsComponent } from "./components/groups/groups.component";
+import { ButtonComponent } from "./components/button/button.component";
+import { GroupItemComponent } from "./components/group-item/group-item.component";
+import { HttpClientModule } from "@angular/common/http";
+import { HomeComponent } from "./components/home/home.component";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
+import { StudentsComponent } from "./components/students/students.component";
 
 @NgModule({
   declarations: [
@@ -21,16 +22,17 @@ import { StudentsComponent } from './components/students/students.component';
     ButtonComponent,
     GroupItemComponent,
     HomeComponent,
-    StudentsComponent
+    StudentsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
-    HttpClientModule
+    MatTableModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
