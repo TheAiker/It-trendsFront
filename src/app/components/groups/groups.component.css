@@ -1,14 +1,26 @@
 .group-container {
   margin: 150px 30px;
-}
-.demo-table {
+  height: 400px;
   width: 100%;
+  background-color: red
 }
-
-.demo-button-container {
-  padding-bottom: 16px;
+.group-table {
+  height: 50px;
+  background-color: blue;
 }
-
-.demo-button + .demo-button {
-  margin-left: 8px;
+.group-table-head {
+  height: 50px;
+ background-color: blueviolet;
+}
+.group-table-head-row {
+  height: 50px;
+  background-color: brown;
+}
+.group-table-body {
+  height: 50px;
+ background-color: chartreuse;
+}
+.group-table-body-row {
+  height: 50px;
+  background-color: rgb(128, 110, 40);
 }

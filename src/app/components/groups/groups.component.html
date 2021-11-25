@@ -1,71 +1,22 @@
-<p class="group-container">groups works!</p>
 <app-group-item></app-group-item>
-<div class="group-container">
-  <div class="demo-button-container">
-    <button mat-raised-button (click)="addData()" class="demo-button">
-      Add data
-    </button>
-    <button
-        mat-raised-button
-        [disabled]="!dataSource.length"
-        (click)="removeData()"
-        class="demo-button">
-      Remove data
-    </button>
-  </div>
-  <div>
-    <app-button>
-    </app-button>
-    <input type="submit">
-  </div>
 
-<div>
-  <table>
-    <thead>
-      <tr>
+<div class="group-container">
+  <table class="group-table">
+    <thead class="group-table-head">
+      <tr class="group-table-head-row">
         <th>GroupName</th>
         <th>Group year</th>
         <th>President</th>
         <th>Year</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="Groupies">
-        <td><span>{{groups.GroupName}}</span></td>
-        <td><span>{{}}</span></td>
-        <td><span>{{}}</span></td>
-        <td><span>{{}}</span></td>
+    <tbody class="group-table-body">
+      <tr class="group-table-body-row" *ngFor="let group of groups">
+        <td><span>{{group.GroupName}}</span></td>
+        <td><span>{{group.GroupYear}}</span></td>
+        <td><span>{{group.President}}</span></td>
+        <td><span>{{group.Year}}</span></td>
       </tr>
     </tbody>
   </table>
-</div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let element">{{element.position}}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef>Weight</th>
-      <td mat-cell *matCellDef="let element">{{element.weight}}</td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
-      <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
 </div>
