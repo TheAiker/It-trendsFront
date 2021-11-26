@@ -17,3 +17,30 @@
   height: 50px;
   background-color: rgb(128, 110, 40);
 }
+
+.group-list-container, ul {
+  list-style-type: none;
+}
+.group-list-container {
+  margin: 0;
+  padding: 0;
+}
+.group-list-arrow {
+  cursor: pointer;
+  user-select: none;
+}
+.group-list-arrow::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+.group-list-arrow-down::before {
+  transform: rotate(90deg);
+}
+.group-list-nested {
+  display: none;
+}
+.active {
+  display: block;
+}

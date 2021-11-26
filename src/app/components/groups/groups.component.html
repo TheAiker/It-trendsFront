@@ -4,6 +4,7 @@
   <table class="group-table">
     <thead>
       <tr class="group-table-head-row">
+        <th>Id</th>
         <th>GroupName</th>
         <th>Group year</th>
         <th>President</th>
@@ -11,7 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="group-table-body-row" *ngFor="let group of groups">
+      <tr class="group-table-body-row" *ngFor="let group of groups" (click)="onGroupClick(group)">
+        <td><span>{{group.Id}}</span></td>
         <td><span>{{group.GroupName}}</span></td>
         <td><span>{{group.GroupYear}}</span></td>
         <td><span>{{group.President}}</span></td>
@@ -19,4 +21,9 @@
       </tr>
     </tbody>
   </table>
+  <ul>
+    <li  *ngFor="let student of selectedStudents">
+      {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
+    </li>
+  </ul>
 </div>
