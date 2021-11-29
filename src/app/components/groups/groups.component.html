@@ -27,3 +27,39 @@
     </li>
   </ul>
 </div>
+<div class="edit-table-container">
+  <!-- <div class="add-groups">
+    <form action="">
+      <label for="GName">Group Name</label>
+      <input type="text"  id="GName">
+      <label for="GYear">Group Year</label>
+      <input type="number" id="GYear">
+      <label for="President">President</label>
+      <input type="text" id="President">
+      <label for="Year">Year</label>
+      <input type="number" id="Year">
+
+    </form>
+  </div> -->
+  <div class="edit-groups">
+    <form action="http://localhost:4200/api/Home/Groups" method="post" [formGroup]="addGroupForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="GName">GroupName</label>
+        <input type="text" id="GName" formControlName="GName">
+      </div>
+      <div>
+        <label for="GYear">Group Year</label>
+        <input type="number" id="GYear" formContolName="GYear">
+      </div>
+      <div>
+        <label for="President">President of the group</label>
+        <input type="text" id="President" formControlName="President">
+      </div>
+      <div>
+        <label for="Year">Year</label>
+        <input type="number" id="Year" formControlName="Year">
+      </div>
+      <button class="addButton" type="submit">Add</button>
+    </form>
+  </div>
+</div>

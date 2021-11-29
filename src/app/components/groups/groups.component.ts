@@ -1,5 +1,6 @@
 import { HttpClient, HttpEvent } from "@angular/common/http";
 import { Component, OnInit, Injectable } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
 import {
   MatTreeFlatDataSource,
   MatTreeFlattener,
@@ -28,7 +29,7 @@ export class Group {
 export class GroupsComponent implements OnInit {
   groups?: Group[] = [];
   selectedStudents: Student[] = [];
-  constructor(private HttpClient: HttpClient) {}
+  constructor(private HttpClient: HttpClient, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.getGroups();
@@ -36,6 +37,11 @@ export class GroupsComponent implements OnInit {
 
   onGroupClick(group: Group): void {
     this.selectedStudents = group.Students;
+  }
+
+  clearForm() {
+    this.groups = [];
+    return this.groups;
   }
 
   getGroups() {
@@ -46,6 +52,18 @@ export class GroupsComponent implements OnInit {
       this.groups = response;
     });
   }
+
+  addGroupForm = this.formBuilder.group({
+    groupName: '',
+    groupYear: '',
+    president: '',
+    year: ''
+  })
+
+  onSubmit(): void {
+
+    this.groups = this.clearForm();
+    console.warn('Group has been added', this.addGroupForm.value);
+    this.addGroupForm.reset();
+  }
 }
-let toggler = document.getElementsByClassName("caret");
-let i: number;

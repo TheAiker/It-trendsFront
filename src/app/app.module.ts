@@ -13,6 +13,8 @@ import { HomeComponent } from "./components/home/home.component";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
 import { StudentsComponent } from "./components/students/students.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { StudentsComponent } from "./components/students/students.component";
     MatIconModule,
     MatTableModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

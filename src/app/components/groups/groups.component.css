@@ -1,7 +1,7 @@
 .group-container {
-  margin: 150px 30px;
+  margin: 150px 20px;
   height: 400px;
-  width: 100%;
+  width: 50%;
   background-color: red
 }
 .group-table {
