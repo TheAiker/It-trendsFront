@@ -1,8 +1,10 @@
 .group-container {
   margin: 150px 20px;
   height: 400px;
-  width: 50%;
-  background-color: red
+  width: 80%;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
 }
 .group-table {
   height: 50px;

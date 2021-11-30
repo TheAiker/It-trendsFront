@@ -1,66 +1,72 @@
 <app-group-item></app-group-item>
+<div class="group-container" >
+  <div>
+    <table class="group-table">
+      <thead>
+        <tr class="group-table-head-row">
+          <th>Id</th>
+          <th>GroupName</th>
+          <th>Group year</th>
+          <th>President</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="group-table-body-row" *ngFor="let group of service.groups" (click)="onGroupClick(group)">
+          <td><span>{{group.Id}}</span></td>
+          <td><span>{{group.GroupName}}</span></td>
+          <td><span>{{group.GroupYear}}</span></td>
+          <td><span>{{group.President}}</span></td>
+          <td><span>{{group.Year}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li  *ngFor="let student of selectedStudents">
+        {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
+      </li>
+    </ul>
+  </div>
+  <div class="edit-table-container">
+    <!-- <div class="add-groups">
+      <form action="">
+        <label for="GName">Group Name</label>
+        <input type="text"  id="GName">
+        <label for="GYear">Group Year</label>
+        <input type="number" id="GYear">
+        <label for="President">President</label>
+        <input type="text" id="President">
+        <label for="Year">Year</label>
+        <input type="number" id="Year">
 
-<div class="group-container">
-  <table class="group-table">
-    <thead>
-      <tr class="group-table-head-row">
-        <th>Id</th>
-        <th>GroupName</th>
-        <th>Group year</th>
-        <th>President</th>
-        <th>Year</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="group-table-body-row" *ngFor="let group of service.groups" (click)="onGroupClick(group)">
-        <td><span>{{group.Id}}</span></td>
-        <td><span>{{group.GroupName}}</span></td>
-        <td><span>{{group.GroupYear}}</span></td>
-        <td><span>{{group.President}}</span></td>
-        <td><span>{{group.Year}}</span></td>
-      </tr>
-    </tbody>
-  </table>
-  <ul>
-    <li  *ngFor="let student of selectedStudents">
-      {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
-    </li>
-  </ul>
-</div>
-<div class="edit-table-container">
-  <!-- <div class="add-groups">
-    <form action="">
-      <label for="GName">Group Name</label>
-      <input type="text"  id="GName">
-      <label for="GYear">Group Year</label>
-      <input type="number" id="GYear">
-      <label for="President">President</label>
-      <input type="text" id="President">
-      <label for="Year">Year</label>
-      <input type="number" id="Year">
-
-    </form>
-  </div> -->
-  <div class="edit-groups">
-      <!-- <div>
-        <input type="hidden" name="Id" [value]="newGroup.Id">
-      </div> -->
-      <div class="add-group-form">
-        <label>GroupName</label>
-        <input required maxlength="24" class="add-group-form-lg" type="text" name="groupName" [(ngModel)]="newGroup.GroupName" >
-      </div>
-      <div>
-        <label>Year</label>
-        <input required maxlength="4" class="add-group-form-lg" type="number" name="year" [(ngModel)]="newGroup.Year">
-      </div>
-      <div>
-        <label>President of the group</label>
-        <input required maxlength="24" class="add-group-form-lg" type="text" name="president"  [(ngModel)]="newGroup.President" >
-      </div>
-      <div>
-        <label>Group Year</label>
-        <input required maxlength="2" class="add-group-form-lg" type="number" name="groupYear" [(ngModel)]="newGroup.GroupYear">
-      </div>
-      <button class="addButton" (click)=submitGroup()>Add</button>
+      </form>
+    </div> -->
+    <div class="edit-groups">
+        <!-- <div>
+          <input type="hidden" name="Id" [value]="newGroup.Id">
+        </div> -->
+        <div class="add-group-form">
+          <label>GroupName</label>
+          <input required maxlength="24" class="add-group-form-lg" type="text" name="groupName" [(ngModel)]="newGroup.GroupName" >
+        </div>
+        <div>
+          <label>Year</label>
+          <input required maxlength="4" class="add-group-form-lg" type="number" name="year" [(ngModel)]="newGroup.Year">
+        </div>
+        <div>
+          <select name="" id="">
+            <option value="">Choose the president</option>
+            <option ngFor="" [ngValue]="">{{}}</option>
+          </select>
+          <label>President of the group</label>
+          <input required maxlength="24" class="add-group-form-lg" type="text" name="president"  [(ngModel)]="newGroup.President" >
+        </div>
+        <div>
+          <label>Group Year</label>
+          <input required maxlength="2" class="add-group-form-lg" type="number" name="groupYear" [(ngModel)]="newGroup.GroupYear">
+        </div>
+        <div></div>
+        <button class="addButton" (click)=submitGroup()>Add</button>
+    </div>
   </div>
 </div>
