@@ -11,7 +11,6 @@ import { GroupItemComponent } from "./components/group-item/group-item.component
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from "./components/home/home.component";
 import { MatIconModule } from "@angular/material/icon";
-import { MatTableModule } from "@angular/material/table";
 import { StudentsComponent } from "./components/students/students.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -31,7 +30,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatTableModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
