@@ -12,6 +12,7 @@ import { Student } from '../../shared/http.model';
 export class GroupsComponent implements OnInit {
   selectedStudents: Student[] = [];
 
+
   constructor(public service: HttpService) {}
 
   newGroup: Group = {
@@ -58,10 +59,11 @@ export class GroupsComponent implements OnInit {
     if (fileList) {
       data.append('imgFile', fileList[0]);
     }
-    // console.log("SURTYASTYUS", data.);
     this.service.addStudent(data);
   }
+
   delStudent(Id?: number) {
     if (Id) this.service.deleteStudent(Id);
   }
+
 }
