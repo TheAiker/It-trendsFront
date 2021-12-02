@@ -2,6 +2,7 @@
 <div class="group-container" >
   <div>
     <table class="group-table">
+
       <thead>
         <tr class="group-table-head-row">
           <th></th>
@@ -13,6 +14,7 @@
           <th></th>
         </tr>
       </thead>
+
       <tbody>
         <tr class="group-table-body-row" *ngFor="let group of service.groups" (click)="onGroupClick(group)">
           <td><button (click)=delGroup(group.Id) >Delete</button></td>
@@ -24,39 +26,32 @@
           <td><button>Edit</button></td>
         </tr>
       </tbody>
+
     </table>
     <ul>
-      <li  *ngFor="let student of selectedStudents">
+      <li *ngFor="let student of selectedStudents">
         {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
+        <button (click)=delStudent(student.Id) >Delete</button>
       </li>
     </ul>
   </div>
-  <div class="edit-table-container">
-    <!-- <div class="add-groups">
-      <form action="">
-        <label for="GName">Group Name</label>
-        <input type="text"  id="GName">
-        <label for="GYear">Group Year</label>
-        <input type="number" id="GYear">
-        <label for="President">President</label>
-        <input type="text" id="President">
-        <label for="Year">Year</label>
-        <input type="number" id="Year">
 
-      </form>
-    </div> -->
+  <div class="edit-table-container">
     <div class="edit-groups">
         <!-- <div>
           <input type="hidden" name="Id" [value]="newGroup.Id">
         </div> -->
+
         <div class="add-group-form">
           <label>GroupName</label>
           <input required maxlength="24" class="add-group-form-lg" type="text" name="groupName" [(ngModel)]="newGroup.GroupName" >
         </div>
+
         <div>
           <label>Year</label>
           <input required maxlength="4" class="add-group-form-lg" type="number" name="year" [(ngModel)]="newGroup.Year">
         </div>
+
         <div>
           <label>President of the group</label>
           <select name="President of the group" id="">
@@ -66,22 +61,45 @@
             </option>
           </select>
         </div>
+
         <div>
           <label>Group Year</label>
           <input required maxlength="2" class="add-group-form-lg" type="number" name="groupYear" [(ngModel)]="newGroup.GroupYear">
         </div>
-        <div></div>
-        <button class="addButton" (click)=submitGroup()>Add</button>
-        <div>
-          <input type="file" #file placeholder="Choose file" (change)='service.uploadPhoto(file.files)' style="display: none">
-          <button (click)="file.click()">Upload File</button>
-        </div>
+
+      <button class="addButton" (click)=submitGroup()>Submit group</button>
+
         <div>
           <span *ngIf="service.progress > 0">
             {{service.progress}}%
           </span>
           <span *ngIf="service.message">{{service.message}}</span>
         </div>
+
+    </div>
+
+    <div>
+      <label for="">First Name</label>
+      <input type="text" [(ngModel)]="newStudent.FirstName">
+
+      <label for="">Last Name</label>
+      <input type="text" [(ngModel)]="newStudent.LastName">
+
+      <label for="">Phone number</label>
+      <input type="number" [(ngModel)]="newStudent.PhoneNumber">
+
+      <label for=""></label>
+      <select name="Choose group" id="" [(ngModel)]="newStudent.GroupForeignKey">
+        <option value="">Choose a group</option>
+        <option *ngFor="let group of service.groups" [ngValue]="group.Id">
+          {{group.GroupName}}
+        </option>
+      </select>
+
+      <div>
+        <input type="file"  #file placeholder="Choose file" (change)="submitStudent($event)" style="display: none">
+        <button (click)="file.click()">Submit student</button>
+      </div>
     </div>
   </div>
 </div>

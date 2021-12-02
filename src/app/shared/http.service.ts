@@ -2,6 +2,13 @@ import { EventEmitter, Injectable, Output } from "@angular/core";
 import { HttpClient, HttpEventType } from "@angular/common/http";
 import { OnInit } from "@angular/core";
 import { Group, Student } from "./http.model";
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+})
+};
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +20,6 @@ export class HttpService implements OnInit {
   @Output() onUploadFinished = new EventEmitter();
 
   groups: Group[] = [];
-  students?: Student[] = [];
 
   ngOnInit(): void {}
 
@@ -43,28 +49,19 @@ export class HttpService implements OnInit {
     });
   }
 
-  addStudent(students: Student) {
-    return this.HttpClient.post(
-      "http://localhost:4200/api/api/group/addStudent",
-      students
-    ).subscribe((response) => {
-      console.log(response);
-    });
-  }
 
-  uploadPhoto = (photos:FileList | null) => {
-    if (photos === null)
+  addStudent = (student: FormData) => {
+    if (student === null)
       return;
-    if (photos.length === 0 ) return;
-
-    let photoToUpload = <File>photos[0];
-    const formData = new FormData();
-    formData.append("photo", photoToUpload, photoToUpload.name);
+    if (!student.has("imgFile")) return;
 
     this.HttpClient.post(
       "http://localhost:4200/api/api/groups/images",
-      formData,
-      { reportProgress: true, observe: 'events' }
+      student,
+      { reportProgress: true, observe: 'events', headers: {
+        'Accept': 'application/json',
+        // 'Content-Type': 'multipart/form-data'
+      } }
     ).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress)
         this.progress = Math.round(100 * event.loaded / event.loaded);
@@ -74,4 +71,13 @@ export class HttpService implements OnInit {
       }
     });
   };
+
+  deleteStudent(Id: number) {
+    return this.HttpClient.post(
+      "http://localhost:4200/api/api/group/deleteStudent",
+      Id
+    ).subscribe((response) => {
+      console.log(response);
+    });
+  }
 }

@@ -12,11 +12,9 @@ export class Group {
     Students?: Student[]=[];
 }
 export class Student {
-  constructor(
-    public Id: number,
-    public FirstName: string,
-    public LastName: string,
-    public PhoneNumber: number,
-    public GroupForeignKey: number,
-  ){}
+    Id?: number=0;
+    FirstName: string='';
+    LastName: string='';
+    PhoneNumber: number=0;
+    GroupForeignKey?: number=0;
 }
