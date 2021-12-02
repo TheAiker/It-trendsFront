@@ -1,6 +1,3 @@
-import { Student } from "../components/students/students.component";
-
-
 
 export class Http {
 
@@ -13,4 +10,13 @@ export class Group {
     President: string='';
     GroupYear: number=0;
     Students?: Student[]=[];
+}
+export class Student {
+  constructor(
+    public Id: number,
+    public FirstName: string,
+    public LastName: string,
+    public PhoneNumber: number,
+    public GroupForeignKey: number,
+  ){}
 }

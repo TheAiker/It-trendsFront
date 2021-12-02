@@ -4,20 +4,24 @@
     <table class="group-table">
       <thead>
         <tr class="group-table-head-row">
+          <th></th>
           <th>Id</th>
           <th>GroupName</th>
           <th>Group year</th>
           <th>President</th>
           <th>Year</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr class="group-table-body-row" *ngFor="let group of service.groups" (click)="onGroupClick(group)">
+          <td><button (click)=delGroup(group.Id) >Delete</button></td>
           <td><span>{{group.Id}}</span></td>
           <td><span>{{group.GroupName}}</span></td>
           <td><span>{{group.GroupYear}}</span></td>
           <td><span>{{group.President}}</span></td>
           <td><span>{{group.Year}}</span></td>
+          <td><button>Edit</button></td>
         </tr>
       </tbody>
     </table>
@@ -54,12 +58,13 @@
           <input required maxlength="4" class="add-group-form-lg" type="number" name="year" [(ngModel)]="newGroup.Year">
         </div>
         <div>
-          <select name="" id="">
-            <option value="">Choose the president</option>
-            <option ngFor="" [ngValue]="">{{}}</option>
-          </select>
           <label>President of the group</label>
-          <input required maxlength="24" class="add-group-form-lg" type="text" name="president"  [(ngModel)]="newGroup.President" >
+          <select name="President of the group" id="">
+            <option value="">Choose the president</option>
+            <option *ngFor="let student of selectedStudents">
+              {{ student.FirstName }} {{ student.LastName }}
+            </option>
+          </select>
         </div>
         <div>
           <label>Group Year</label>
@@ -67,6 +72,16 @@
         </div>
         <div></div>
         <button class="addButton" (click)=submitGroup()>Add</button>
+        <div>
+          <input type="file" #file placeholder="Choose file" (change)='service.uploadPhoto(file.files)' style="display: none">
+          <button (click)="file.click()">Upload File</button>
+        </div>
+        <div>
+          <span *ngIf="service.progress > 0">
+            {{service.progress}}%
+          </span>
+          <span *ngIf="service.message">{{service.message}}</span>
+        </div>
     </div>
   </div>
 </div>
