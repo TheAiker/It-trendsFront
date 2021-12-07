@@ -16,7 +16,7 @@
       </thead>
 
       <tbody>
-        <tr class="group-table-body-row" *ngFor="let group of service.groups" (click)="onGroupClick(group)">
+        <tr class="group-table-body-row" *ngFor="let group of groups" (click)="onGroupClick(group)">
           <td><button (click)=delGroup(group.Id) >Delete</button></td>
           <td><span>{{group.Id}}</span></td>
           <td><span>{{group.GroupName}}</span></td>
@@ -30,6 +30,7 @@
     </table>
     <ul>
       <li *ngFor="let student of selectedStudents">
+
         {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
         <button (click)=delStudent(student.Id) >Delete</button>
       </li>
@@ -91,7 +92,7 @@
       <label for=""></label>
       <select name="Choose group" id="" [(ngModel)]="newStudent.GroupForeignKey">
         <option value="">Choose a group</option>
-        <option *ngFor="let group of service.groups" [ngValue]="group.Id">
+        <option *ngFor="let group of groups" [ngValue]="group.Id">
           {{group.GroupName}}
         </option>
       </select>

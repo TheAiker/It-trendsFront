@@ -1,44 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Group } from 'src/app/shared/http.model';
-import { HttpService } from 'src/app/shared/http.service';
-import { Student } from '../../shared/http.model';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { Group } from "src/app/shared/http.model";
+import { HttpService } from "src/app/shared/http.service";
+import { Student } from "../../shared/http.model";
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css'],
+  selector: "app-groups",
+  templateUrl: "./groups.component.html",
+  styleUrls: ["./groups.component.css"],
 })
 export class GroupsComponent implements OnInit {
   selectedStudents: Student[] = [];
-
+  groups: Group[] = [];
 
   constructor(public service: HttpService) {}
 
   newGroup: Group = {
-    GroupName: '',
+    GroupName: "",
     GroupYear: 0,
-    President: '',
+    President: "",
     Year: 0,
   };
 
   newStudent: Student = {
-    FirstName: '',
-    LastName: '',
+    FirstName: "",
+    LastName: "",
     PhoneNumber: 0,
     GroupForeignKey: 0,
   };
 
   ngOnInit(): void {
-    this.service.getGroups();
+    this.loadGroups();
+  }
+
+  async loadGroups(): Promise<void> {
+    this.groups = await this.service.getGroups();
   }
 
   delGroup(Id?: number) {
-    if (Id) this.service.deleteGroup(Id);
+    if (Id) {
+      this.service.deleteGroup(Id);
+      this.loadGroups();
+    }
   }
+
   submitGroup() {
     console.log(this.newGroup);
     this.service.addGroup(this.newGroup);
+    this.loadGroups();
   }
 
   onGroupClick(group: Group): void {
@@ -50,20 +59,26 @@ export class GroupsComponent implements OnInit {
     let fileList: FileList | null = element.files;
     let data = new FormData();
 
-    data.append('FirstName', this.newStudent.FirstName);
-    data.append('LastName',  this.newStudent.LastName);
-    data.append('PhoneNumber', this.newStudent.PhoneNumber.toString());
+    data.append("FirstName", this.newStudent.FirstName);
+    data.append("LastName", this.newStudent.LastName);
+    data.append("PhoneNumber", this.newStudent.PhoneNumber.toString());
     if (this.newStudent.GroupForeignKey) {
-      data.append('GroupForeignKey',  this.newStudent.GroupForeignKey.toString());
+      data.append(
+        "GroupForeignKey",
+        this.newStudent.GroupForeignKey.toString()
+      );
     }
     if (fileList) {
-      data.append('imgFile', fileList[0]);
+      data.append("imgFile", fileList[0]);
     }
     this.service.addStudent(data);
+    this.loadGroups();
   }
 
   delStudent(Id?: number) {
-    if (Id) this.service.deleteStudent(Id);
+    if (Id) {
+      this.service.deleteStudent(Id);
+      this.loadGroups();
+    }
   }
-
 }

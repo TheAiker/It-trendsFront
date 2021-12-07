@@ -1,13 +1,13 @@
 import { EventEmitter, Injectable, Output } from "@angular/core";
-import { HttpClient, HttpEventType } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { OnInit } from "@angular/core";
-import { Group, Student } from "./http.model";
-import { HttpHeaders } from '@angular/common/http';
+import { Group } from "./http.model";
+import { HttpHeaders } from "@angular/common/http";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-})
+    "Content-Type": "application/json",
+  }),
 };
 
 @Injectable({
@@ -21,71 +21,49 @@ export class HttpService implements OnInit {
 
   @Output() onUploadFinished = new EventEmitter();
 
-  groups: Group[] = [];
-
   ngOnInit(): void {}
 
-  getGroups() {
-    this.HttpClient.get<Array<Group>>(
+  async getGroups(): Promise<Array<Group>> {
+    const groups = await this.HttpClient.get<Array<Group>>(
       "http://localhost:4200/api/api/Groups/Index"
-    ).subscribe((response) => {
-      console.log(response);
-      this.groups = response;
-    });
+    ).toPromise();
+    return groups || [];
   }
 
-  addGroup(group: Group) {
-    return this.HttpClient.post(
+  async addGroup(group: Group): Promise<void> {
+    await this.HttpClient.post(
       "http://localhost:4200/api/api/group/create",
       group
-    ).subscribe((response) => {
-      console.log(response);
-    });
+    ).toPromise();
   }
-  deleteGroup(Id: number) {
-    return this.HttpClient.post(
+
+  async deleteGroup(Id: number): Promise<void> {
+    await this.HttpClient.post(
       "http://localhost:4200/api/api/group/deleteGroup",
       Id
-    ).subscribe((response) => {
-      console.log(response);
-    });
+    ).toPromise();
   }
 
-
-  addStudent = (student: FormData) => {
-    if (student === null)
+  async addStudent(student: FormData): Promise<void> {
+    if (!student.has("imgFile")) {
       return;
-    if (!student.has("imgFile")) return;
+    }
 
-    this.HttpClient.post(
+    await this.HttpClient.post<{ dbPath: string }>(
       "http://localhost:4200/api/api/groups/images",
       student,
-      { reportProgress: true, observe: 'events', headers: {
-        'Accept': 'application/json',
-        // 'Content-Type': 'multipart/form-data'
-      } }
-    ).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.loaded);
-      else if(event.type === HttpEventType.Response){
-        if(!event.body) {
-          return;
-        }
-        const body = event.body as {"dbPath" : string};
-        this.dbPath = body.dbPath as string;
-        this.message = 'Upload finished.';
-        console.log(this.dbPath);
-        this.onUploadFinished.emit(event.body);
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }
-    });
-  };
+    ).toPromise();
+  }
 
-  deleteStudent(Id: number) {
-    return this.HttpClient.post(
+  async deleteStudent(Id: number): Promise<void> {
+    await this.HttpClient.post(
       "http://localhost:4200/api/api/group/deleteStudent",
       Id
-    ).subscribe((response) => {
-      console.log(response);
-    });
+    ).toPromise();
   }
 }
