@@ -1,8 +1,8 @@
 .group-container {
   margin: 150px 20px;
-  height: 400px;
-  width: 80%;
-  background-color: red;
+  padding: 10px 10px;
+  height: auto;
+  background-color: gray;
   display: flex;
   justify-content: space-between;
 }
@@ -45,4 +45,77 @@
 }
 .active {
   display: block;
+}
+
+.edit-table-container {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  width: 50%;
+  min-height: 400px;
+  flex-wrap: wrap;
+  align-content: space-between;
+  gap: 10px 200px;
+}
+.add-groups {
+  display: flex;
+  padding: 10px;
+  height:  200px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.add-groups .add-group-name, .add-group-year, .add-group-group-year {
+  display: flex;
+  margin: 5px 0px;
+  flex-direction: column;
+}
+
+.add-students {
+  display: flex;
+  padding: 10px;
+  height:  200px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.add-students .add-students-name, .add-students-last-name, .add-students-phone, .add-students-group, .add-students-submit  {
+  display: flex;
+  margin: 5px 0px;
+  flex-direction: column;
+}
+
+.edit-group {
+  display: flex;
+  padding: 10px;
+  height:  250px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.edit-group .edit-group-select, .edit-group-name, .edit-group-year, .edit-group-president, .edit-group-group-year  {
+  display: flex;
+
+  margin: 5px 0px;
+  flex-direction: column;
+}
+
+.edit-students {
+  display: flex;
+  padding: 10px;
+  height:  250px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.edit-students .edit-group-name, .edit-group-last-name, .edit-group-phone, .edit-group-choose, .edit-group-submit, p {
+  display: flex;
+
+  margin: 5px 0px;
+  flex-direction: column;
 }

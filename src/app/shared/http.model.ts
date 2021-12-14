@@ -14,4 +14,5 @@ export class Student {
   LastName: string = "";
   PhoneNumber: number = 0;
   GroupForeignKey?: number = 0;
+  Image: Blob[] = [];
 }

@@ -11,7 +11,7 @@
           <th>Group year</th>
           <th>President</th>
           <th>Year</th>
-          <th></th>
+
         </tr>
       </thead>
 
@@ -23,14 +23,13 @@
           <td><span>{{group.GroupYear}}</span></td>
           <td><span>{{group.President}}</span></td>
           <td><span>{{group.Year}}</span></td>
-          <td><button>Edit</button></td>
         </tr>
       </tbody>
 
     </table>
     <ul>
-      <li *ngFor="let student of selectedStudents">
-
+      <li *ngFor="let student of selectedStudents" (click)="onStudentClick(student)">
+        <img src="{{student.Image}}"  style="width:60px; height:60px;" alt="">
         {{ student.FirstName }} {{ student.LastName }} {{student.PhoneNumber}}
         <button (click)=delStudent(student.Id) >Delete</button>
       </li>
@@ -38,68 +37,124 @@
   </div>
 
   <div class="edit-table-container">
-    <div class="edit-groups">
-        <!-- <div>
-          <input type="hidden" name="Id" [value]="newGroup.Id">
-        </div> -->
-
-        <div class="add-group-form">
+    <div class="add-groups">
+        <div class="add-group-name">
           <label>GroupName</label>
-          <input required maxlength="24" class="add-group-form-lg" type="text" name="groupName" [(ngModel)]="newGroup.GroupName" >
+          <input required maxlength="24" type="text" name="groupName" [(ngModel)]="newGroup.GroupName" >
         </div>
 
-        <div>
+        <div class="add-group-year">
           <label>Year</label>
-          <input required maxlength="4" class="add-group-form-lg" type="number" name="year" [(ngModel)]="newGroup.Year">
+          <input required maxlength="4" type="number" name="year" [(ngModel)]="newGroup.Year">
         </div>
 
-        <div>
-          <label>President of the group</label>
-          <select name="President of the group" id="">
-            <option value="">Choose the president</option>
-            <option *ngFor="let student of selectedStudents">
-              {{ student.FirstName }} {{ student.LastName }}
-            </option>
-          </select>
-        </div>
-
-        <div>
+        <div class="add-group-group-year">
           <label>Group Year</label>
-          <input required maxlength="2" class="add-group-form-lg" type="number" name="groupYear" [(ngModel)]="newGroup.GroupYear">
+          <input required maxlength="2" type="number" name="groupYear" [(ngModel)]="newGroup.GroupYear">
         </div>
 
       <button class="addButton" (click)=submitGroup()>Submit group</button>
-
-        <div>
-          <span *ngIf="service.progress > 0">
-            {{service.progress}}%
-          </span>
-          <span *ngIf="service.message">{{service.message}}</span>
-        </div>
-
     </div>
 
-    <div>
-      <label for="">First Name</label>
-      <input type="text" [(ngModel)]="newStudent.FirstName">
+    <div class="add-students">
+      <div class="add-students-name">
+        <label for="">First Name</label>
+        <input type="text" [(ngModel)]="newStudent.FirstName">
+      </div>
 
-      <label for="">Last Name</label>
-      <input type="text" [(ngModel)]="newStudent.LastName">
+      <div class="add-students-last-name">
+        <label for="">Last Name</label>
+        <input type="text" [(ngModel)]="newStudent.LastName">
+      </div>
 
-      <label for="">Phone number</label>
-      <input type="number" [(ngModel)]="newStudent.PhoneNumber">
+      <div class="add-students-phone">
+        <label for="">Phone number</label>
+        <input type="number" [(ngModel)]="newStudent.PhoneNumber">
+      </div>
 
-      <label for=""></label>
-      <select name="Choose group" id="" [(ngModel)]="newStudent.GroupForeignKey">
-        <option value="">Choose a group</option>
-        <option *ngFor="let group of groups" [ngValue]="group.Id">
-          {{group.GroupName}}
-        </option>
-      </select>
+      <div class="add-students-group">
+        <select name="Choose group" id="" [(ngModel)]="newStudent.GroupForeignKey">
+          <option value="" hidden selected>Choose a group</option>
+          <option *ngFor="let group of groups" [ngValue]="group.Id">
+            {{group.GroupName}}
+          </option>
+        </select>
+      </div>
 
-      <div>
-        <input type="file"  #file placeholder="Choose file" (change)="submitStudent($event)" style="display: none">
+      <div class="add-students-submit">
+        <input type="file" #file placeholder="Choose file" (change)="submitStudent($event)" style="display: none">
         <button (click)="file.click()">Submit student</button>
+      </div>
+    </div>
+
+    <div class="edit-group">
+      <div class="edit-group-select">
+        <select name="Choose group"  [(ngModel)]="groupToEdit">
+          <option  selected value="">Choose a group</option>
+          <option *ngFor="let group of groups" [ngValue]="group">
+            {{group.GroupName}}
+          </option>
+        </select>
+      </div>
+
+      <div class="edit-group-name">
+        <label>GroupName</label>
+        <input required maxlength="24" class="form-control" type="text" name="groupName" [(ngModel)]="groupToEdit.GroupName" >
+      </div>
+
+      <div class="edit-group-year">
+        <label>Year</label>
+        <input required maxlength="4" class="form-control"   type="number" name="year" [(ngModel)]="groupToEdit.Year">
+      </div>
+
+      <div class="edit-group-president">
+        <label>President of the group</label>
+        <select name="President of the group" name="president" [(ngModel)]="groupToEdit.President">
+          <option >Choose the president</option>
+          <option *ngFor="let student of groupToEdit.Students">
+            {{ student.FirstName }} {{ student.LastName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="edit-group-group-year">
+        <label>Group Year</label>
+        <input required maxlength="2" class="add-group-form-lg" type="number" name="groupYear" [(ngModel)]="groupToEdit.GroupYear">
+      </div>
+
+      <button (click)=editGroup()>Edit</button>
+    </div>
+
+    <div class="edit-students">
+      <p>Click on student in group to select</p>
+      <div class="edit-group-name">
+        <input type="hidden" [(ngModel)]="studentToEdit.Id">
+        <label for="">First Name</label>
+        <input type="text" [(ngModel)]="studentToEdit.FirstName">
+      </div>
+
+      <div class="edit-group-last-name">
+        <label for="">Last Name</label>
+        <input type="text" [(ngModel)]="studentToEdit.LastName">
+      </div>
+
+      <div class="edit-group-phone">
+        <label for="">Phone number</label>
+        <input type="number" [(ngModel)]="studentToEdit.PhoneNumber">
+      </div>
+
+      <div class="edit-group-choose">
+        <select name="Choose group"  [(ngModel)]="studentToEdit.GroupForeignKey">
+          <option >Choose a group</option>
+          <option *ngFor="let group of groups" [ngValue]="group.Id">
+            {{group.GroupName}}
+          </option>
+        </select>
+      </div>
+
+      <div class="edit-group-submit">
+        <input type="file"  #updatedFile placeholder="Choose file" (change)="editStudent($event)" style="display: none">
+        <button (click)="updatedFile.click()">Edit Student</button>
       </div>
     </div>
   </div>

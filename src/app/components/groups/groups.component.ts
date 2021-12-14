@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
 import { Group } from "src/app/shared/http.model";
 import { HttpService } from "src/app/shared/http.service";
 import { Student } from "../../shared/http.model";
@@ -15,6 +14,13 @@ export class GroupsComponent implements OnInit {
 
   constructor(public service: HttpService) {}
 
+  groupToEdit: Group = {
+    GroupName: "",
+    GroupYear: 0,
+    President: "",
+    Year: 0,
+  };
+
   newGroup: Group = {
     GroupName: "",
     GroupYear: 0,
@@ -27,6 +33,15 @@ export class GroupsComponent implements OnInit {
     LastName: "",
     PhoneNumber: 0,
     GroupForeignKey: 0,
+    Image: [],
+  };
+
+  studentToEdit: Student = {
+    FirstName: "",
+    LastName: "",
+    PhoneNumber: 0,
+    GroupForeignKey: 0,
+    Image: [],
   };
 
   ngOnInit(): void {
@@ -44,8 +59,14 @@ export class GroupsComponent implements OnInit {
     }
   }
 
+  editGroup() {
+    if (this.groupToEdit) {
+      this.service.updateGroup(this.groupToEdit);
+      this.loadGroups();
+    }
+  }
+
   submitGroup() {
-    console.log(this.newGroup);
     this.service.addGroup(this.newGroup);
     this.loadGroups();
   }
@@ -54,10 +75,14 @@ export class GroupsComponent implements OnInit {
     this.selectedStudents = group.Students || [];
   }
 
+  onStudentClick(student: Student): void {
+    this.studentToEdit = student;
+  }
+
   submitStudent(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
-    let fileList: FileList | null = element.files;
-    let data = new FormData();
+    let file: FileList | null = element.files;
+    let data: FormData = new FormData();
 
     data.append("FirstName", this.newStudent.FirstName);
     data.append("LastName", this.newStudent.LastName);
@@ -68,11 +93,41 @@ export class GroupsComponent implements OnInit {
         this.newStudent.GroupForeignKey.toString()
       );
     }
-    if (fileList) {
-      data.append("imgFile", fileList[0]);
+
+    if (file) {
+      data.append("Image", file[0]);
     }
     this.service.addStudent(data);
     this.loadGroups();
+  }
+
+  editStudent(updateEvent: Event) {
+    if (this.studentToEdit) {
+      const element = updateEvent.currentTarget as HTMLInputElement;
+      let updatedFile: FileList | null = element.files;
+      let updateFormData: FormData = new FormData();
+      if (this.studentToEdit.Id !== undefined) {
+        updateFormData.append("Id", this.studentToEdit.Id.toString());
+      }
+      updateFormData.append("FirstName", this.studentToEdit.FirstName);
+      updateFormData.append("LastName", this.studentToEdit.LastName);
+      updateFormData.append(
+        "PhoneNumber",
+        this.studentToEdit.PhoneNumber.toString()
+      );
+      if (this.studentToEdit.GroupForeignKey) {
+        updateFormData.append(
+          "GroupForeignKey",
+          this.studentToEdit.GroupForeignKey.toString()
+        );
+      }
+
+      if (updatedFile) {
+        updateFormData.append("Image", updatedFile[0]);
+      }
+      this.service.updateStudent(updateFormData);
+      this.loadGroups();
+    }
   }
 
   delStudent(Id?: number) {
